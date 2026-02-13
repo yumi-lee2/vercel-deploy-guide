@@ -1,0 +1,84 @@
+---
+title: "Vercel 배포"
+description: "GitHub 레포를 Vercel에 연동하고 첫 번째 배포를 진행합니다."
+step: 4
+---
+
+## Vercel에 프로젝트 연동
+
+### 1. Import Project
+
+1. [vercel.com/new](https://vercel.com/new)에 접속
+2. **Import Git Repository** 섹션에서 GitHub 레포를 선택
+3. 레포가 보이지 않으면 **Adjust GitHub App Permissions**를 클릭해 권한 추가
+
+### 2. 프로젝트 설정
+
+Import 후 아래 설정을 확인합니다:
+
+| 항목 | 값 |
+|------|-----|
+| Framework Preset | **Next.js** (자동 감지됨) |
+| Root Directory | `./` |
+| Build Command | `next build` (기본값) |
+| Output Directory | `.next` (기본값) |
+| Install Command | 자동 감지 (pnpm/npm/yarn) |
+
+<Callout type="info">
+Next.js 프로젝트는 Vercel이 자동으로 감지합니다.
+특별한 경우가 아니면 기본 설정 그대로 진행하세요.
+</Callout>
+
+### 3. Deploy 클릭
+
+**Deploy** 버튼을 누르면 배포가 시작됩니다.
+
+1. **Installing dependencies** — 패키지 설치
+2. **Building** — `next build` 실행
+3. **Deploying** — 빌드 결과물 배포
+4. **Ready** — 배포 완료!
+
+## 배포된 URL 확인
+
+배포가 완료되면 자동으로 URL이 생성됩니다:
+
+```
+https://my-app-xxxxxx.vercel.app
+```
+
+- 프로젝트 이름 기반으로 URL이 자동 생성
+- HTTPS가 기본 적용
+- 전 세계 CDN에 배포됨
+
+## 빌드 로그 확인하기
+
+Vercel 대시보드에서 빌드 로그를 확인할 수 있습니다:
+
+1. 프로젝트 대시보드 → **Deployments** 탭
+2. 원하는 배포 클릭
+3. **Building** 섹션에서 로그 확인
+
+### 빌드 로그에서 확인할 것들
+
+- **빌드 시간**: 얼마나 걸렸는지
+- **페이지 목록**: 생성된 페이지와 타입 (Static / Dynamic)
+- **번들 사이즈**: First Load JS 크기
+- **에러/경고**: 빌드 중 발생한 이슈
+
+<Callout type="tip">
+빌드 로그의 Route 섹션에서 각 페이지 옆의 아이콘을 확인하세요.
+○ = Static (빌드 시 생성), λ = Dynamic (요청 시 생성)입니다.
+</Callout>
+
+## 자동 배포
+
+이제부터 `main` 브랜치에 push할 때마다 자동으로 배포됩니다.
+
+```bash
+# 코드 수정 후
+git add .
+git commit -m "Update homepage"
+git push
+
+# → Vercel이 자동으로 감지하고 새 배포 시작
+```

@@ -1,0 +1,92 @@
+---
+title: "Preview 배포"
+description: "PR을 생성하면 자동으로 만들어지는 Preview 배포를 활용하는 방법입니다."
+step: 6
+---
+
+## Preview 배포란?
+
+`main`이 아닌 브랜치에 push하거나 PR을 생성하면,
+Vercel이 자동으로 **고유한 Preview URL**을 생성합니다.
+
+```
+https://my-app-git-feature-xxx-username.vercel.app
+```
+
+이 URL로 변경사항을 배포 전에 미리 확인할 수 있습니다.
+
+## 직접 해보기
+
+### 1. 브랜치 생성
+
+```bash
+git checkout -b feature/update-homepage
+```
+
+### 2. 코드 수정
+
+`app/page.tsx`를 수정합니다:
+
+```tsx
+export default function Home() {
+  return (
+    <main className="flex min-h-screen items-center justify-center">
+      <h1 className="text-4xl font-bold">
+        Updated Homepage!
+      </h1>
+    </main>
+  );
+}
+```
+
+### 3. Push
+
+```bash
+git add .
+git commit -m "Update homepage"
+git push -u origin feature/update-homepage
+```
+
+### 4. PR 생성
+
+GitHub에서 PR을 생성하면:
+
+1. Vercel bot이 자동으로 댓글을 남김
+2. **Preview URL**이 포함됨
+3. 빌드 상태가 PR checks에 표시됨
+
+<Callout type="info">
+PR을 생성하지 않아도, 브랜치에 push하면 Preview 배포가 생성됩니다.
+하지만 PR을 통해야 GitHub에서 Preview URL을 바로 확인할 수 있습니다.
+</Callout>
+
+## Preview 배포 활용법
+
+### 코드 리뷰에 활용
+
+- PR 리뷰어가 **코드만 보지 않고 실제 동작을 확인** 가능
+- 디자인 변경사항을 시각적으로 검증
+- 모바일에서도 접속해서 테스트 가능
+
+### QA에 활용
+
+- 별도 테스트 환경 구축 없이 PR마다 독립된 환경 제공
+- Preview 전용 환경변수를 설정해서 테스트 API 연동 가능
+
+### 여러 Preview 동시 운영
+
+- 각 브랜치/PR마다 독립된 Preview URL
+- 여러 기능을 동시에 개발하며 각각 확인 가능
+
+## Preview vs Production
+
+| 항목 | Preview | Production |
+|------|---------|------------|
+| 트리거 | `main` 외 브랜치 push | `main` 브랜치 push |
+| URL | 브랜치명 포함된 임시 URL | 프로젝트 기본 URL |
+| 환경변수 | Preview 환경 값 | Production 환경 값 |
+| 수명 | PR 닫힐 때까지 유지 | 영구 |
+
+<Callout type="tip">
+Vercel 대시보드의 **Deployments** 탭에서 모든 Preview 배포 이력을 확인할 수 있습니다.
+</Callout>

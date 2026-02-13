@@ -1,0 +1,63 @@
+---
+title: "GitHub 연동"
+description: "프로젝트를 GitHub에 올리고 브랜치 전략을 설정합니다."
+step: 3
+---
+
+## GitHub 레포 생성
+
+1. [github.com/new](https://github.com/new) 에서 새 레포 생성
+2. Repository name: 프로젝트 이름 입력
+3. **Public** 또는 **Private** 선택
+4. README, .gitignore 등은 **체크하지 않음** (이미 로컬에 있으므로)
+5. **Create repository** 클릭
+
+## 로컬 프로젝트와 연결
+
+```bash
+cd my-app
+
+# git 초기화 (create-next-app이 이미 해줬을 수 있음)
+git init
+
+# 원격 저장소 연결
+git remote add origin https://github.com/YOUR_USERNAME/my-app.git
+
+# 첫 커밋 & 푸시
+git add .
+git commit -m "Initial commit"
+git branch -M main
+git push -u origin main
+```
+
+<Callout type="warning">
+`YOUR_USERNAME`을 본인의 GitHub 사용자명으로 바꿔주세요.
+</Callout>
+
+## 브랜치 전략
+
+Vercel은 브랜치에 따라 자동으로 다른 배포를 생성합니다:
+
+| 브랜치 | Vercel 배포 유형 | 용도 |
+|--------|------------------|------|
+| `main` | **Production** | 실제 서비스 URL |
+| 그 외 | **Preview** | PR 리뷰용 임시 URL |
+
+### 추천 워크플로우
+
+```
+main (프로덕션)
+  └── feature/xxx (기능 개발)
+        └── PR 생성 → Preview 배포 자동 생성
+              └── 리뷰 후 merge → Production 자동 배포
+```
+
+<Callout type="tip">
+혼자 작업할 때도 feature 브랜치를 만들어 PR을 생성하면,
+Vercel의 Preview 배포를 경험해볼 수 있습니다.
+</Callout>
+
+## 확인
+
+GitHub 레포 페이지에 접속해서 코드가 올라갔는지 확인하세요.
+다음 단계에서 이 레포를 Vercel에 연동합니다.

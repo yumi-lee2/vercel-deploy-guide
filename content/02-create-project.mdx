@@ -1,0 +1,79 @@
+---
+title: "프로젝트 생성"
+description: "Next.js App Router 프로젝트를 생성하고 로컬에서 실행합니다."
+step: 2
+---
+
+## Next.js 프로젝트 만들기
+
+`create-next-app`으로 새 프로젝트를 생성합니다.
+
+```bash
+pnpm create next-app@latest my-app
+```
+
+설치 중 아래 옵션을 선택하세요:
+
+| 질문 | 선택 |
+|------|------|
+| TypeScript? | **Yes** |
+| ESLint? | **Yes** |
+| Tailwind CSS? | **Yes** |
+| `src/` directory? | No |
+| App Router? | **Yes** |
+| Import alias? | `@/*` (기본값) |
+
+## 프로젝트 구조 이해
+
+생성된 프로젝트의 핵심 구조입니다:
+
+```
+my-app/
+├── app/
+│   ├── layout.tsx    ← 공통 레이아웃 (HTML, body 태그)
+│   ├── page.tsx      ← 루트 페이지 (/)
+│   └── globals.css   ← 전역 스타일
+├── public/           ← 정적 파일 (이미지 등)
+├── next.config.ts    ← Next.js 설정
+├── package.json
+└── tsconfig.json
+```
+
+### App Router란?
+
+Next.js 13부터 도입된 라우팅 방식입니다.
+
+- `app/` 폴더 안의 **폴더 구조가 곧 URL 경로**
+- `app/about/page.tsx` → `/about` 페이지
+- `layout.tsx`로 공통 레이아웃을 정의
+- 기본적으로 **Server Component** (서버에서 렌더링)
+
+## 로컬에서 실행
+
+```bash
+cd my-app
+pnpm dev
+```
+
+브라우저에서 [http://localhost:3000](http://localhost:3000)에 접속하면 Next.js 기본 페이지가 보입니다.
+
+<Callout type="tip">
+`pnpm dev --turbopack`을 사용하면 Turbopack으로 더 빠르게 개발 서버를 실행할 수 있습니다.
+Next.js 15부터 기본으로 포함되어 있습니다.
+</Callout>
+
+## 간단히 수정해보기
+
+`app/page.tsx`를 열어 내용을 수정해보세요:
+
+```tsx
+export default function Home() {
+  return (
+    <main className="flex min-h-screen items-center justify-center">
+      <h1 className="text-4xl font-bold">Hello, Vercel!</h1>
+    </main>
+  );
+}
+```
+
+저장하면 브라우저에 바로 반영됩니다 (Hot Reload).

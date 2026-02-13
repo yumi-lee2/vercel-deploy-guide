@@ -1,0 +1,87 @@
+---
+title: "환경변수 설정"
+description: "Vercel에서 환경변수를 설정하고 환경별로 관리하는 방법을 알아봅니다."
+step: 5
+---
+
+## 환경변수란?
+
+코드에 직접 넣으면 안 되는 값들을 외부에서 주입하는 방식입니다.
+
+- API 키, 시크릿 토큰
+- 데이터베이스 URL
+- 환경별로 다른 설정값 (개발/스테이징/프로덕션)
+
+## 로컬 환경변수 (.env.local)
+
+프로젝트 루트에 `.env.local` 파일을 만들어 로컬 개발용 환경변수를 설정합니다.
+
+```bash
+# .env.local
+NEXT_PUBLIC_SITE_TITLE=Vercel 배포 가이드
+NEXT_PUBLIC_TEAM_NAME=Frontend Team
+API_SECRET_KEY=my-secret-key-12345
+```
+
+### NEXT_PUBLIC_ 접두사
+
+| 접두사 | 접근 가능 위치 |
+|--------|----------------|
+| `NEXT_PUBLIC_` 있음 | 클라이언트 + 서버 |
+| `NEXT_PUBLIC_` 없음 | **서버만** |
+
+<Callout type="warning">
+`NEXT_PUBLIC_`이 붙은 변수는 브라우저에 노출됩니다.
+API 키 같은 민감한 값에는 절대 사용하지 마세요.
+</Callout>
+
+### 코드에서 사용하기
+
+```tsx
+// 서버 컴포넌트에서
+const apiKey = process.env.API_SECRET_KEY;
+
+// 클라이언트 컴포넌트에서
+const title = process.env.NEXT_PUBLIC_SITE_TITLE;
+```
+
+## Vercel 환경변수 설정
+
+1. Vercel 대시보드 → 프로젝트 선택
+2. **Settings** 탭 → **Environment Variables**
+3. Key, Value 입력
+4. 환경 선택 후 **Save**
+
+### 환경별 분리
+
+Vercel은 3가지 환경을 제공합니다:
+
+| 환경 | 적용 시점 | 용도 |
+|------|-----------|------|
+| **Production** | `main` 브랜치 배포 | 실제 서비스 |
+| **Preview** | PR / 다른 브랜치 배포 | 테스트, 리뷰 |
+| **Development** | `vercel dev` 실행 시 | 로컬 개발 |
+
+같은 키에 환경별로 다른 값을 설정할 수 있습니다.
+
+예를 들어 `API_URL`:
+- Production: `https://api.example.com`
+- Preview: `https://staging-api.example.com`
+- Development: `http://localhost:8080`
+
+## .env.local과 Vercel 환경변수의 관계
+
+| 상황 | 사용되는 값 |
+|------|-------------|
+| `pnpm dev` (로컬) | `.env.local` |
+| Vercel 배포 | Vercel 대시보드 설정값 |
+
+<Callout type="tip">
+Vercel CLI를 사용하면 대시보드에 설정한 환경변수를 로컬로 가져올 수 있습니다:
+`vercel env pull .env.local`
+</Callout>
+
+## 환경변수 변경 후
+
+환경변수를 변경하면 **재배포가 필요**합니다.
+Vercel 대시보드에서 **Redeploy** 버튼을 클릭하거나, 코드를 push하면 됩니다.
