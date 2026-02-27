@@ -15,7 +15,7 @@ export default function GuidePage() {
 
   return (
     <>
-      <title>{`${step.step}. ${step.title} — Vercel 배포 가이드`}</title>
+      <title>{`${step.step}. ${step.title} — Vercel 배포 가이드!`}</title>
       <meta name="description" content={step.description} />
       <article>
         <div className="mb-8">
