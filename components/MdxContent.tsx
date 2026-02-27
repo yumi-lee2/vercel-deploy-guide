@@ -1,8 +1,8 @@
-import { MDXRemote } from "next-mdx-remote/rsc";
 import { Callout } from "./Callout";
 import { CodeBlock } from "./CodeBlock";
 
-const components = {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const components: Record<string, React.ComponentType<any>> = {
   Callout,
   CodeBlock,
   h1: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
@@ -75,10 +75,15 @@ const components = {
   ),
 };
 
-export function MdxContent({ source }: { source: string }) {
+export function MdxContent({
+  Component,
+}: {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  Component: React.ComponentType<{ components?: Record<string, React.ComponentType<any>> }>;
+}) {
   return (
     <div className="mdx-content">
-      <MDXRemote source={source} components={components} />
+      <Component components={components} />
     </div>
   );
 }

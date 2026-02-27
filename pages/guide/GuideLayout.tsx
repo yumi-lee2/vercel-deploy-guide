@@ -1,11 +1,8 @@
+import { Outlet } from "react-router-dom";
 import { Sidebar } from "@/components/Sidebar";
 import { getGuideSteps } from "@/lib/content";
 
-export default function GuideLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function GuideLayout() {
   const steps = getGuideSteps();
   const sidebarItems = steps.map((s) => ({
     slug: s.slug,
@@ -18,7 +15,7 @@ export default function GuideLayout({
       <Sidebar items={sidebarItems} />
       <main className="flex-1 pt-14 lg:pt-0">
         <div className="mx-auto max-w-3xl px-6 py-10 lg:px-10 lg:py-16">
-          {children}
+          <Outlet />
         </div>
       </main>
     </div>

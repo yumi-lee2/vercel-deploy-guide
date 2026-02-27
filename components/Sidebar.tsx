@@ -1,7 +1,4 @@
-"use client";
-
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { ThemeToggle } from "./ThemeToggle";
 
@@ -12,7 +9,7 @@ interface SidebarItem {
 }
 
 export function Sidebar({ items }: { items: SidebarItem[] }) {
-  const pathname = usePathname();
+  const { pathname } = useLocation();
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -37,7 +34,7 @@ export function Sidebar({ items }: { items: SidebarItem[] }) {
             <line x1="3" y1="18" x2="21" y2="18" />
           </svg>
         </button>
-        <Link href="/" className="text-sm font-semibold">
+        <Link to="/" className="text-sm font-semibold">
           Vercel 배포 가이드
         </Link>
         <ThemeToggle />
@@ -59,7 +56,7 @@ export function Sidebar({ items }: { items: SidebarItem[] }) {
       >
         <div className="flex h-14 items-center justify-between border-b border-[var(--color-border)] px-5">
           <Link
-            href="/"
+            to="/"
             className="text-sm font-semibold"
             onClick={() => setIsOpen(false)}
           >
@@ -99,7 +96,7 @@ export function Sidebar({ items }: { items: SidebarItem[] }) {
               return (
                 <li key={item.slug}>
                   <Link
-                    href={href}
+                    to={href}
                     onClick={() => setIsOpen(false)}
                     className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors ${
                       isActive

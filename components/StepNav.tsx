@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "react-router-dom";
 
 interface StepLink {
   slug: string;
@@ -17,7 +17,7 @@ export function StepNav({
     <nav className="mt-12 flex items-stretch gap-4 border-t border-[var(--color-border)] pt-6">
       {prev ? (
         <Link
-          href={`/guide/${prev.slug}`}
+          to={`/guide/${prev.slug}`}
           className="group flex flex-1 flex-col rounded-lg border border-[var(--color-border)] p-4 transition-colors hover:border-[var(--color-accent)]"
         >
           <span className="text-xs text-[var(--color-muted)]">
@@ -32,7 +32,7 @@ export function StepNav({
       )}
       {next ? (
         <Link
-          href={`/guide/${next.slug}`}
+          to={`/guide/${next.slug}`}
           className="group flex flex-1 flex-col items-end rounded-lg border border-[var(--color-border)] p-4 text-right transition-colors hover:border-[var(--color-accent)]"
         >
           <span className="text-xs text-[var(--color-muted)]">
