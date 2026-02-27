@@ -15,6 +15,9 @@ export default defineConfig({
     },
     react({ include: /\.(mdx|js|jsx|ts|tsx)$/ }),
   ],
+  build: {
+    outDir: "build",
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "."),

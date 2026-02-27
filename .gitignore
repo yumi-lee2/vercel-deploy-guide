@@ -12,6 +12,7 @@
 /coverage
 
 # build output
+/build
 /dist
 
 # misc
