@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
 import { getGuideSteps } from "@/lib/content";
 
 export default function HomePage() {
@@ -7,13 +6,11 @@ export default function HomePage() {
 
   return (
     <>
-      <Helmet>
-        <title>Vercel 배포 가이드</title>
-        <meta
-          name="description"
-          content="프론트엔드 개발자를 위한 Vercel 배포 가이드. Next.js 프로젝트를 Vercel에 배포하는 전체 흐름을 단계별로 안내합니다."
-        />
-      </Helmet>
+      <title>Vercel 배포 가이드</title>
+      <meta
+        name="description"
+        content="프론트엔드 개발자를 위한 Vercel 배포 가이드. Next.js 프로젝트를 Vercel에 배포하는 전체 흐름을 단계별로 안내합니다."
+      />
       <div className="flex min-h-dvh flex-col">
         {/* Hero */}
         <header className="flex flex-col items-center justify-center px-6 pt-24 pb-16 text-center lg:pt-32 lg:pb-20">

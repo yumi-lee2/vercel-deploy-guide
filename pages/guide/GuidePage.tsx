@@ -1,5 +1,4 @@
 import { useParams, Navigate } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
 import { getGuideStep, getAdjacentSteps } from "@/lib/content";
 import { MdxContent } from "@/components/MdxContent";
 import { StepNav } from "@/components/StepNav";
@@ -16,10 +15,8 @@ export default function GuidePage() {
 
   return (
     <>
-      <Helmet>
-        <title>{`${step.step}. ${step.title} — Vercel 배포 가이드`}</title>
-        <meta name="description" content={step.description} />
-      </Helmet>
+      <title>{`${step.step}. ${step.title} — Vercel 배포 가이드`}</title>
+      <meta name="description" content={step.description} />
       <article>
         <div className="mb-8">
           <span className="mb-2 inline-block rounded-full bg-[var(--color-accent-light)] px-3 py-1 text-xs font-medium text-[var(--color-accent)]">
