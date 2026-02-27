@@ -6,7 +6,7 @@ export default function HomePage() {
 
   return (
     <>
-      <title>Vercel 배포 가이드!</title>
+      <title>Vercel 배포가이드 ver.2</title>
       <meta
         name="description"
         content="프론트엔드 개발자를 위한 Vercel 배포 가이드. Next.js 프로젝트를 Vercel에 배포하는 전체 흐름을 단계별로 안내합니다."
@@ -26,7 +26,7 @@ export default function HomePage() {
             Next.js + Vercel
           </div>
           <h1 className="max-w-2xl text-4xl font-bold tracking-tight lg:text-5xl">
-            Vercel 배포 가이드!
+            Vercel 배포가이드 ver.2
           </h1>
           <p className="mt-4 max-w-lg text-lg text-[var(--color-muted)]">
             프론트엔드 개발자를 위한 단계별 배포 가이드.
