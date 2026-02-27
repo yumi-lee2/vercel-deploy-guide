@@ -5,13 +5,15 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "serve dist -l 3000 -s"
   },
   "dependencies": {
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.0.0",
+    "serve": "^14.2.0",
     "shiki": "^3.4.2"
   },
   "devDependencies": {
